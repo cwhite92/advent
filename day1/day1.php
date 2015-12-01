@@ -27,3 +27,9 @@ foreach (str_split($instructions) as $position => $instruction) {
 
 echo "Part 1 answer: {$currentFloor}\n";
 echo "Part 2 answer: {$basementPosition}";
+
+/*
+ * Code golfed! 103 bytes!
+ *
+ * <?php $f=$b=0;foreach(str_split(file('i')[0])as$p=>$d){($f-=$d=='('?-1:1)>=0|$b?:$b=$p+1;}echo"$f $b";
+ */
