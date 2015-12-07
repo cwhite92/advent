@@ -3,7 +3,7 @@
 $directions = str_split(file_get_contents('input.txt'));
 
 $x = $y = 0;
-$visited[$x.$y] = 1;
+$visited[$x.$y] = true;
 
 foreach ($directions as $direction) {
     // Update Santa's position based on the direction given by the drunk elf
@@ -22,14 +22,10 @@ foreach ($directions as $direction) {
             break;
     }
 
-    if (isset($visited[$x.$y])) {
-        // We've visited this house before
-        $visited[$x.$y]++;
-    } else {
-        $visited[$x.$y] = 1;
+    if (!isset($visited[$x.$y])) {
+        // Santa is visiting this house for the first time
+        $visited[$x.$y] = true;
     }
 }
 
-$houses = count($visited);
-
-echo "Number of houses with at least one present: {$houses}\n";
+echo sprintf("Number of houses with at least one present: %s\n", count($visited));
