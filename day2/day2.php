@@ -1,14 +1,19 @@
 <?php
 
 $presents = explode("\n", file_get_contents('input.txt'));
-$total = 0;
+$totalPaper = 0;
+$totalRibbon = 0;
 
 foreach ($presents as $present) {
-    list($l, $w, $h) = explode('x', $present);
+    $dimensions = explode('x', $present);
+    sort($dimensions, SORT_NUMERIC);
 
-    $total += (2 * $l * $w) + (2 * $w * $h) + (2 * $h * $l);
-    $total += min($l * $w, $w * $h, $h * $l);
+    $totalPaper += (2 * $dimensions[0] * $dimensions[1]) + (2 * $dimensions[1] * $dimensions[2]) + (2 * $dimensions[2] * $dimensions[0]);
+    $totalPaper += min($dimensions[0] * $dimensions[1], $dimensions[1] * $dimensions[2], $dimensions[2] * $dimensions[0]);
+
+    $totalRibbon += 2 * ($dimensions[0] + $dimensions[1]);
+    $totalRibbon += $dimensions[0] * $dimensions[1] * $dimensions[2];
 }
 
-echo "Total square feet of wrapping paper needed: $total\n";
-
+echo "Total square feet of wrapping paper needed: $totalPaper\n";
+echo "Total feet of ribbon required: $totalRibbon\n";
